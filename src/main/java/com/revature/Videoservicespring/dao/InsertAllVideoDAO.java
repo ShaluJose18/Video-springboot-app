@@ -66,7 +66,7 @@ public class InsertAllVideoDAO {
 			pst.setString(3, artifact.getDescription());
 			pst.setInt(4, videoId);
 			pst.executeUpdate();
-
+			pst.close();
 			String sqlprogram = "insert into programs(name,artifact,description,video_id)values(?,?,?,?)";
 			pst = con.prepareStatement(sqlprogram);
 			pst.setString(1, sampleProgram.getName());
@@ -74,7 +74,7 @@ public class InsertAllVideoDAO {
 			pst.setString(3, sampleProgram.getDescription());
 			pst.setInt(4, videoId);
 			pst.executeUpdate();
-
+			pst.close();
 			String refUrl = "insert into urls(name,artifact,description,type,video_id)values(?,?,?,?,?)";
 			pst = con.prepareStatement(refUrl);
 			pst.setString(1, url.getName());
@@ -82,24 +82,22 @@ public class InsertAllVideoDAO {
 			pst.setString(3, url.getDescription());
 			pst.setString(4, url.getType());
 			pst.setInt(5, videoId);
-
+			pst.executeUpdate();
+			pst.close();
 			if (count == 1) {
 				result = true;
 			}
 			con.commit();
 			
 		} catch (SQLException e) {
+			con.rollback(newVideo);
 			e.printStackTrace();
 			throw new DBException(MessageConstants.video_exist);
 		} finally {
 			try {
+				
 				con.close();
-				pst.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
-				con.rollback(newVideo);
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

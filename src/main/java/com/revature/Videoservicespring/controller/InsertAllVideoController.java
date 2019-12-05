@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("Allvideos")
+@RequestMapping("video")
 public class InsertAllVideoController {
 
 	@Autowired
@@ -41,12 +41,12 @@ public class InsertAllVideoController {
 	 * @throws ValidatorException on input error
 	 * 
 	 */
-	@PostMapping()
+	@PostMapping("/")
 	@ApiOperation(value = "AllvideoAPI")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Video created", response = String.class),
 			@ApiResponse(code = 400, message = "Invalid video", response = Video.class) })
 
-	public ResponseEntity<?> addCategory(@RequestBody VideoDTO videodto) throws SQLException {
+	public ResponseEntity<?> addVideos(@RequestBody VideoDTO videodto) throws SQLException {
 
 		try {
 			videoService.insertVideo(videodto);
@@ -59,7 +59,7 @@ public class InsertAllVideoController {
 
 	}
 	
-	@GetMapping
+	@GetMapping("/list")
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<Video> ListVideos() throws ServiceException, SQLException {
 		List<Video> viewResponse =listAllVideos.listAll();
