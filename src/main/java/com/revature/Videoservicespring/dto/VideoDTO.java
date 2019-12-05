@@ -15,4 +15,24 @@ public class VideoDTO {
 	private int level_id;
 	private int category_id;
 	private boolean status;
+	
+	private int idA;
+	private String nameA;
+	private String artifactA;
+	private String descriptionA;
+	private int videoIdA;
+	
+	private int idP;
+	private String nameP;
+	private String artifactP;
+	private String descriptionP;
+	private int videoIdoP;
+	
+	private int idU;
+	private String nameU;
+	private String artifactU;
+	private String descriptionU;
+	private String typeU;
+	private int videoIdU; 
+	
 }

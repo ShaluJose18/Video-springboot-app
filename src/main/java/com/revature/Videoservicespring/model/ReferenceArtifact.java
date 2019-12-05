@@ -3,8 +3,10 @@ package com.revature.Videoservicespring.model;
 import lombok.Data;
 
 @Data
-public class SampleProgram {
 
+public class ReferenceArtifact {
+
+	
 	private int id;
 	private String name;
 	private String artifact;
