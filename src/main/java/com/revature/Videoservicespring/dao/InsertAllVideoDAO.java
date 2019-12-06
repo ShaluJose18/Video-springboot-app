@@ -10,12 +10,10 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.dao.DataIntegrityViolationException;
 
+import com.revature.Videoservicespring.dto.VideoDTO;
 import com.revature.Videoservicespring.exception.DBException;
-import com.revature.Videoservicespring.model.ReferenceArtifact;
-import com.revature.Videoservicespring.model.ReferenceUrl;
-import com.revature.Videoservicespring.model.SampleProgram;
-import com.revature.Videoservicespring.model.Video;
 import com.revature.Videoservicespring.util.MessageConstants;
 
 @Repository
@@ -27,8 +25,9 @@ public class InsertAllVideoDAO {
 	PreparedStatement pst = null;
 	Boolean result = false;
 	Savepoint newVideo = null;
+	Savepoint deleteVideo=null;
 
-	public boolean newVideo(Video video, ReferenceArtifact artifact, SampleProgram sampleProgram, ReferenceUrl url)
+	public boolean newVideo(VideoDTO videodto)
 			throws SQLException, DBException {
 		
 		try {
@@ -38,14 +37,14 @@ public class InsertAllVideoDAO {
 			
 			String sql = "insert into videos(name, display_name, vimeo_video_url, tags, description, transcript, level_id, category_id)values(?,?,?,?,?,?,?,?)";
 			pst = con.prepareStatement(sql);
-			pst.setString(1, video.getVideoName());
-			pst.setString(2, video.getDisplayName());
-			pst.setString(3, video.getVimeoVideoUrl());
-			pst.setString(4, video.getTags());
-			pst.setString(5, video.getDescription());
-			pst.setString(6, video.getTranscript());
-			pst.setInt(7, video.getLevel_id());
-			pst.setInt(8, video.getCategory_id());
+			pst.setString(1, videodto.getVideo().getVideoName());
+			pst.setString(2, videodto.getVideo().getDisplayName());
+			pst.setString(3, videodto.getVideo().getVimeoVideoUrl());
+			pst.setString(4, videodto.getVideo().getTags());
+			pst.setString(5, videodto.getVideo().getDescription());
+			pst.setString(6, videodto.getVideo().getTranscript());
+			pst.setInt(7, videodto.getVideo().getLevel_id());
+			pst.setInt(8, videodto.getVideo().getCategory_id());
 			int count = pst.executeUpdate();
 			pst.close();
 
@@ -59,40 +58,49 @@ public class InsertAllVideoDAO {
 			}
 			System.out.println("Selected Value: "+videoId);
 			
-			String refArtifact = "insert into artifacts(name,artifact,description,video_id)values(?,?,?,?)";
+			String refArtifact = "insert into video_artifacts(name,artifact,description,video_id)values(?,?,?,?)";
 			pst = con.prepareStatement(refArtifact);
-			pst.setString(1, artifact.getName());
-			pst.setString(2, artifact.getArtifact());
-			pst.setString(3, artifact.getDescription());
+			pst.setString(1, videodto.getArtifact().getName());
+			pst.setString(2, videodto.getArtifact().getArtifact());
+			pst.setString(3, videodto.getArtifact().getDescription());
 			pst.setInt(4, videoId);
 			pst.executeUpdate();
 			pst.close();
-			String sqlprogram = "insert into programs(name,artifact,description,video_id)values(?,?,?,?)";
+			
+			String sqlprogram = "insert into video_programs(name,artifact,description,video_id)values(?,?,?,?)";
 			pst = con.prepareStatement(sqlprogram);
-			pst.setString(1, sampleProgram.getName());
-			pst.setString(2, sampleProgram.getArtifact());
-			pst.setString(3, sampleProgram.getDescription());
+			pst.setString(1, videodto.getSampleprogram().getName());
+			pst.setString(2, videodto.getSampleprogram().getArtifact());
+			pst.setString(3, videodto.getSampleprogram().getDescription());
 			pst.setInt(4, videoId);
 			pst.executeUpdate();
 			pst.close();
-			String refUrl = "insert into urls(name,artifact,description,type,video_id)values(?,?,?,?,?)";
+			
+			String refUrl = "insert into video_urls(name,url,description,type,video_id)values(?,?,?,?,?)";
 			pst = con.prepareStatement(refUrl);
-			pst.setString(1, url.getName());
-			pst.setString(2, url.getArtifact());
-			pst.setString(3, url.getDescription());
-			pst.setString(4, url.getType());
+			pst.setString(1, videodto.getUrl().getName());
+			pst.setString(2, videodto.getUrl().getArtifact());
+			pst.setString(3, videodto.getUrl().getDescription());
+			pst.setString(4, videodto.getUrl().getType());
 			pst.setInt(5, videoId);
 			pst.executeUpdate();
 			pst.close();
+			
 			if (count == 1) {
 				result = true;
 			}
 			con.commit();
 			
-		} catch (SQLException e) {
-			con.rollback(newVideo);
+		}
+		catch (DataIntegrityViolationException e) {
+			
+	        System.out.println("Video name already exist");
+	    }
+		catch (SQLException e) {
+			e.getMessage().contains("uk_videos");
 			e.printStackTrace();
-			throw new DBException(MessageConstants.video_exist);
+			con.rollback(newVideo);
+			throw new DataIntegrityViolationException(MessageConstants.video_exist);
 		} finally {
 			try {
 				
@@ -104,4 +112,70 @@ public class InsertAllVideoDAO {
 		}
 		return result;
 	}
+	
+//	public boolean deleteVideo(int videoId) throws SQLException, DBException {
+//		
+//		try {
+//			con = datasource.getConnection();
+//			con.setAutoCommit(false);
+//			deleteVideo = con.setSavepoint("SAVEPOINT");
+//			
+//			String sql = "delete from videos where id=?";
+//			pst = con.prepareStatement(sql);
+//			pst.setInt(1, videoId);
+//			int count = pst.executeUpdate();
+//			
+//			System.out.println("Selected Value: "+videoId);
+//			
+//			String refArtifact = "delete from video_artifacts where video_id=?";
+//			pst = con.prepareStatement(refArtifact);
+//			pst.setInt(1, videoId);
+//			pst.executeUpdate();
+//			pst.close();
+//			
+//			String sqlprogram = "insert into video_programs(name,artifact,description,video_id)values(?,?,?,?)";
+//			pst = con.prepareStatement(sqlprogram);
+//			pst.setString(1, videodto.getSampleprogram().getName());
+//			pst.setString(2, videodto.getSampleprogram().getArtifact());
+//			pst.setString(3, videodto.getSampleprogram().getDescription());
+//			pst.setInt(4, videoId);
+//			pst.executeUpdate();
+//			pst.close();
+//			
+//			String refUrl = "insert into video_urls(name,url,description,type,video_id)values(?,?,?,?,?)";
+//			pst = con.prepareStatement(refUrl);
+//			pst.setString(1, videodto.getUrl().getName());
+//			pst.setString(2, videodto.getUrl().getArtifact());
+//			pst.setString(3, videodto.getUrl().getDescription());
+//			pst.setString(4, videodto.getUrl().getType());
+//			pst.setInt(5, videoId);
+//			pst.executeUpdate();
+//			pst.close();
+//			
+//			if (count == 1) {
+//				result = true;
+//			}
+//			con.commit();
+//			
+//		}
+//		catch (DataIntegrityViolationException e) {
+//			
+//	        System.out.println("Video name already exist");
+//	    }
+//		catch (SQLException e) {
+//			
+//			e.printStackTrace();
+//			con.rollback(deleteVideo);
+//			throw new DBException(MessageConstants.video_exist);
+//		} finally {
+//			try {
+//				
+//				con.close();
+//				
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		return result;
+//	}
 }

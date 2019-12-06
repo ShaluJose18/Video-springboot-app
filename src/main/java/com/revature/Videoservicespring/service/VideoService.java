@@ -6,7 +6,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.revature.Videoservicespring.dao.VideoDAOImp;
-import com.revature.Videoservicespring.dto.VideoDTO;
+import com.revature.Videoservicespring.dto.VideoaddDTO;
 import com.revature.Videoservicespring.exception.DBException;
 import com.revature.Videoservicespring.exception.ServiceException;
 import com.revature.Videoservicespring.model.Video;
@@ -18,7 +18,7 @@ public class VideoService {
 	@Autowired
 	private VideoDAOImp videoRepository; 
 	@Transactional
-	public Boolean insertVideo(VideoDTO videodto) throws ServiceException, SQLException
+	public Boolean insertVideo(VideoaddDTO videodto) throws ServiceException, SQLException
 	{
 		Video video=new Video(); 
 		Boolean result;

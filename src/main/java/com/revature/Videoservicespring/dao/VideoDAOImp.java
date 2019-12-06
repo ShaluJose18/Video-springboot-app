@@ -61,7 +61,7 @@ public class VideoDAOImp implements VideoDAO {
 		
 		try {
 			con = datasource.getConnection();
-			String sql = "select id,name,display_name,vimeo_video_url,tags from videos";
+			String sql = "select id,name,display_name,vimeo_video_url,tags from videos limit 20";
 			pst = con.prepareStatement(sql);
 			rs = pst.executeQuery();
 			list = new ArrayList<Video>();
@@ -102,5 +102,6 @@ public class VideoDAOImp implements VideoDAO {
 		videos.setTags(tags);
 		return videos;
 	}
-
+	
+	
 }
