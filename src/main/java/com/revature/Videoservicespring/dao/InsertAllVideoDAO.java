@@ -97,8 +97,11 @@ public class InsertAllVideoDAO {
 	        System.out.println("Video name already exist");
 	    }
 		catch (SQLException e) {
+			
 			e.getMessage().contains("uk_videos");
-			e.printStackTrace();
+			String message = e.getMessage();
+			System.out.println(message);
+			//e.printStackTrace();
 			con.rollback(newVideo);
 			throw new DataIntegrityViolationException(MessageConstants.video_exist);
 		} finally {
@@ -113,69 +116,59 @@ public class InsertAllVideoDAO {
 		return result;
 	}
 	
-//	public boolean deleteVideo(int videoId) throws SQLException, DBException {
-//		
-//		try {
-//			con = datasource.getConnection();
-//			con.setAutoCommit(false);
-//			deleteVideo = con.setSavepoint("SAVEPOINT");
-//			
-//			String sql = "delete from videos where id=?";
-//			pst = con.prepareStatement(sql);
-//			pst.setInt(1, videoId);
-//			int count = pst.executeUpdate();
-//			
-//			System.out.println("Selected Value: "+videoId);
-//			
-//			String refArtifact = "delete from video_artifacts where video_id=?";
-//			pst = con.prepareStatement(refArtifact);
-//			pst.setInt(1, videoId);
-//			pst.executeUpdate();
-//			pst.close();
-//			
-//			String sqlprogram = "insert into video_programs(name,artifact,description,video_id)values(?,?,?,?)";
-//			pst = con.prepareStatement(sqlprogram);
-//			pst.setString(1, videodto.getSampleprogram().getName());
-//			pst.setString(2, videodto.getSampleprogram().getArtifact());
-//			pst.setString(3, videodto.getSampleprogram().getDescription());
-//			pst.setInt(4, videoId);
-//			pst.executeUpdate();
-//			pst.close();
-//			
-//			String refUrl = "insert into video_urls(name,url,description,type,video_id)values(?,?,?,?,?)";
-//			pst = con.prepareStatement(refUrl);
-//			pst.setString(1, videodto.getUrl().getName());
-//			pst.setString(2, videodto.getUrl().getArtifact());
-//			pst.setString(3, videodto.getUrl().getDescription());
-//			pst.setString(4, videodto.getUrl().getType());
-//			pst.setInt(5, videoId);
-//			pst.executeUpdate();
-//			pst.close();
-//			
-//			if (count == 1) {
-//				result = true;
-//			}
-//			con.commit();
-//			
-//		}
-//		catch (DataIntegrityViolationException e) {
-//			
-//	        System.out.println("Video name already exist");
-//	    }
-//		catch (SQLException e) {
-//			
-//			e.printStackTrace();
-//			con.rollback(deleteVideo);
-//			throw new DBException(MessageConstants.video_exist);
-//		} finally {
-//			try {
-//				
-//				con.close();
-//				
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		return result;
-//	}
+	public boolean deleteVideo(int videoId) throws SQLException, DBException {
+		
+		try {
+			con = datasource.getConnection();
+			con.setAutoCommit(false);
+			deleteVideo = con.setSavepoint("SAVEPOINT");
+			
+			String sql = "delete from videos where id=?";
+			pst = con.prepareStatement(sql);
+			pst.setInt(1, videoId);
+			int count = pst.executeUpdate();
+			
+			System.out.println("Selected Value: "+videoId);
+			pst.close();
+			
+			String refArtifact = "delete from video_artifacts where video_id=?";
+			pst = con.prepareStatement(refArtifact);
+			pst.setInt(1, videoId);
+			pst.executeUpdate();
+			pst.close();
+			
+			String sqlprogram = "delete from video_programs where video_id=?";
+			pst = con.prepareStatement(sqlprogram);
+			pst.setInt(1, videoId);
+			pst.executeUpdate();
+			pst.close();
+			
+			String refUrl = "delete from video_urls where video_id=?";
+			pst = con.prepareStatement(refUrl);
+			pst.setInt(1, videoId);
+			pst.executeUpdate();
+			pst.close();
+			
+			if (count == 1) {
+				result = true;
+			}
+			con.commit();
+		}
+
+		catch (SQLException e) {
+			
+			e.printStackTrace();
+			con.rollback(deleteVideo);
+			throw new DBException(MessageConstants.delete_video);
+		} finally {
+			try {
+				
+				con.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
 }
