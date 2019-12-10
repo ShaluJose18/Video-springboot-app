@@ -61,7 +61,7 @@ public class VideoDAOImp implements VideoDAO {
 		
 		try {
 			con = datasource.getConnection();
-			String sql = "select id,name,display_name,vimeo_video_url,tags from videos limit 20";
+			String sql = "select id,name,display_name,vimeo_video_url,status from videos limit 20";
 			pst = con.prepareStatement(sql);
 			rs = pst.executeQuery();
 			list = new ArrayList<Video>();
@@ -92,14 +92,64 @@ public class VideoDAOImp implements VideoDAO {
 		String videoName = rs.getString("name");
 		String displayName = rs.getString("display_name");
 		String vimeoVideoUrl = rs.getString("vimeo_video_url");
-		String tags = rs.getString("tags");
+		boolean status = rs.getBoolean("status");
 		videos = new Video();
 		
 		videos.setId(videoId);
 		videos.setVideoName(videoName);
 		videos.setDisplayName(displayName);
 		videos.setVimeoVideoUrl(vimeoVideoUrl);
-		videos.setTags(tags);
+		videos.setStatus(status);
+		return videos;
+	}
+	
+	
+	public List<Video> listActiveVideos( boolean status ) throws DBException {
+		ResultSet rs = null;
+		List<Video> list = null;
+		
+		try {
+			con = datasource.getConnection();
+			String sql = "select id,name,display_name,vimeo_video_url,status from videos where status=?";
+			pst = con.prepareStatement(sql);
+			pst.setBoolean(1, status);
+			rs = pst.executeQuery();
+			
+			list = new ArrayList<Video>();
+			while (rs.next()) {
+				Video video = setActiveVideos(rs);
+				list.add(video);
+				System.out.println("Videos" + list);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DBException(MessageConstants.video_list);
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return list;
+
+	}
+	
+	private Video setActiveVideos(ResultSet rs) throws SQLException {
+		Video videos = null;
+		boolean status=rs.getBoolean("status");
+		int videoId = rs.getInt("id");
+		String videoName = rs.getString("name");
+		String displayName = rs.getString("display_name");
+		String vimeoVideoUrl = rs.getString("vimeo_video_url");
+		videos = new Video();
+		
+		videos.setStatus(status);
+		videos.setId(videoId);
+		videos.setVideoName(videoName);
+		videos.setDisplayName(displayName);
+		videos.setVimeoVideoUrl(vimeoVideoUrl);
 		return videos;
 	}
 	

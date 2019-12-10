@@ -1,67 +1,45 @@
 package com.revature.Videoservicespring.service;
 
+//import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import com.revature.Videoservicespring.dao.VideoDAOImp;
-import com.revature.Videoservicespring.exception.DBException;
 import com.revature.Videoservicespring.exception.ServiceException;
 import com.revature.Videoservicespring.model.Video;
 
-@RunWith(MockitoJUnitRunner.class)
-public class TestService {
+@SpringBootTest
+class TestService {
+	@Autowired
+	ListAllVideos videos;
 	
-	@InjectMocks
-	ListAllVideos listallVideos;
-	
-	
-	@Mock
-	VideoDAOImp videodao;
-	
-	@Before
-	public void init() {
-		MockitoAnnotations.initMocks(this);
-	}
 
 	@Test
-	public void testListvideos(){
-		
-		List<Video> listService=new ArrayList<Video>();			//Service
-		List<Video> listDAO=new ArrayList<Video>();				//DAO
-		try {
-			
-			Video videoObj = new Video();
-			videoObj.setId(1);
-			videoObj.setDisplayName("corejava");
-			listDAO.add(videoObj);
-			
-			listService=listallVideos.listAll();
-			when(videodao.listVideos()).thenReturn(listDAO);
-			when(listallVideos.listAll()).thenReturn(listService);
-			assertEquals(listService, listallVideos.listAll());
-			assertNotNull(listService);
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (DBException e) {
-			e.printStackTrace();
-		}
-			
+	void listVideos() throws ServiceException, SQLException {
+		List<Video> video=null;
+		video=videos.listAll();
+		assertNotNull(video);
+	}
+	
+	@Test
+	void listActiveVideo() throws ServiceException {
+		boolean status=true;
+		List<Video> video=null;
+		video=videos.listActiveVideos(status);
+		assertNotNull(video);
+	}
+	
+	
+	@Test
+	void listDeactiveVideo() throws ServiceException {
+		boolean status=false;
+		List<Video> video=null;
+		video=videos.listActiveVideos(status);
+		assertNotNull(video);
 	}
 
+	
 }

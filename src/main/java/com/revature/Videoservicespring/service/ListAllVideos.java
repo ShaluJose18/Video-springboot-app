@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.Videoservicespring.dao.VideoDAOImp;
+import com.revature.Videoservicespring.exception.DBException;
 import com.revature.Videoservicespring.exception.ServiceException;
 import com.revature.Videoservicespring.model.Video;
 
@@ -31,4 +32,18 @@ public class ListAllVideos {
 		System.out.println("list"+videos);
 		return videos;
 	}
+	
+	@Transactional
+	public List<Video> listActiveVideos(boolean status) throws ServiceException{
+		List<Video> videos=null;
+		try {
+			videos=listAllVideos.listActiveVideos(status);
+		} catch (DBException e) {
+			e.printStackTrace();
+			throw new ServiceException("Unable to list Videos");
+		
+	}
+		System.out.println("Active List"+videos);
+		return videos;
+}
 }

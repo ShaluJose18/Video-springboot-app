@@ -64,6 +64,11 @@ public class InsertAllVideoService {
 			}
 			return result;
 		}
+		
+		public boolean deleteVideo(int videoId) {
+			return false;
+			
+		}
 
 	}
 

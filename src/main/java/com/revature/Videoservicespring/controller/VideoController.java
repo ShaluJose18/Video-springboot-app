@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -61,8 +62,16 @@ public class VideoController {
 	
 	@GetMapping("/list")
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<Video> ListVideos() throws ServiceException, SQLException {
+	public List<Video> listVideos() throws ServiceException, SQLException {
 		List<Video> viewResponse =listAllVideos.listAll();
+		return viewResponse;
+		
+	}
+	
+	@GetMapping("/ActiveVideos")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<Video> listActiveVideos(@RequestParam("Status") boolean status) throws ServiceException, SQLException {
+		List<Video> viewResponse =listAllVideos.listActiveVideos(status);
 		return viewResponse;
 		
 	}
