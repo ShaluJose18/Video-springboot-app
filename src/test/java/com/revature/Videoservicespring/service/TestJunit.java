@@ -1,26 +1,23 @@
 package com.revature.Videoservicespring.service;
 
-//import org.junit.Test;
-import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertNotNull;
 import java.sql.SQLException;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.Test;
 
+import com.revature.Videoservicespring.dao.VideoDAOImp;
 import com.revature.Videoservicespring.exception.ServiceException;
 import com.revature.Videoservicespring.model.Video;
+import com.revature.Videoservicespring.util.ConnectionUtil;
 
-@SpringBootTest
-public class TestService {
-	@Autowired
-	ListAllVideoService videos;
+class TestJunit {
+
+	ListAllVideoService listAllVideos=new ListAllVideoService(new VideoDAOImp(new ConnectionUtil()));
 	
-
 	@Test
 	void listVideos() throws ServiceException, SQLException {
 		List<Video> video=null;
-		video=videos.listAll();
+		video=listAllVideos.listAll();
 		assertNotNull(video);
 	}
 	
@@ -28,7 +25,10 @@ public class TestService {
 	void listActiveVideo() throws ServiceException {
 		boolean status=true;
 		List<Video> video=null;
-		video=videos.listActiveVideos(status);
+		video=listAllVideos
+				
+				
+				.listActiveVideos(status);
 		assertNotNull(video);
 	}
 	
@@ -37,9 +37,9 @@ public class TestService {
 	void listDeactiveVideo() throws ServiceException {
 		boolean status=false;
 		List<Video> video=null;
-		video=videos.listActiveVideos(status);
+		video=listAllVideos.listActiveVideos(status);
 		assertNotNull(video);
 	}
 
-	
+
 }

@@ -14,10 +14,15 @@ import com.revature.Videoservicespring.exception.ServiceException;
 import com.revature.Videoservicespring.model.Video;
 
 @Service
-public class ListAllVideos {
+public class ListAllVideoService {
 
 	@Autowired
 	VideoDAOImp listAllVideos;
+	
+	public ListAllVideoService(VideoDAOImp videoDao) {
+		this.listAllVideos=videoDao;
+	}
+	
 
 	@Transactional
 	public List<Video> listAll() throws ServiceException, SQLException

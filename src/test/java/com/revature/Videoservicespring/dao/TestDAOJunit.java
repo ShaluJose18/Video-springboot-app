@@ -1,6 +1,6 @@
 package com.revature.Videoservicespring.dao;
 
-import static org.junit.Assert.assertNotNull;
+
 
 import java.util.List;
 
@@ -15,20 +15,20 @@ import com.revature.Videoservicespring.model.Video;
 @SpringBootTest
 class TestDAOJunit {
 
-	VideoDAO videodao=new VideoDAOImp();
-	
-	@Test
-	public List<Video> testListVideos() {
-		
-		
-		List<Video> video=null;
-		try {
-			video=videodao.listVideos();
-			assertNotNull(true);
-		} catch (DBException e) {
-			e.printStackTrace();
-		}
-		return video;
+//	VideoDAO videodao=new VideoDAOImp();
+//	
+//	@Test
+//	public List<Video> testListVideos() {
+//		
+//		
+//		List<Video> video=null;
+//		try {
+//			video=videodao.listVideos();
+//			assertNotNull(true);
+//		} catch (DBException e) {
+//			e.printStackTrace();
+//		}
+//		return video;
 	}
 	
 //	@Test
@@ -131,4 +131,4 @@ class TestDAOJunit {
 //		}
 //	}
 
-}
+//}

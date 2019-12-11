@@ -14,6 +14,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 
 import com.revature.Videoservicespring.dto.VideoDTO;
 import com.revature.Videoservicespring.exception.DBException;
+import com.revature.Videoservicespring.util.ConnectionUtil;
 import com.revature.Videoservicespring.util.MessageConstants;
 
 @Repository
@@ -26,9 +27,13 @@ public class InsertAllVideoDAO {
 	Boolean result = false;
 	Savepoint newVideo = null;
 	Savepoint deleteVideo=null;
+	
+	private ConnectionUtil connection;
+	public InsertAllVideoDAO(ConnectionUtil connection) {
+		this.connection=connection;
+	}
 
-	public boolean newVideo(VideoDTO videodto)
-			throws SQLException, DBException {
+	public boolean newVideo(VideoDTO videodto) throws SQLException, DBException {
 		
 		try {
 			con = datasource.getConnection();
@@ -116,25 +121,20 @@ public class InsertAllVideoDAO {
 		return result;
 	}
 	
-	public boolean deleteVideo(int videoId) throws SQLException, DBException {
+	public boolean deleteVideo(int videoId) throws DBException {
 		
 		try {
 			con = datasource.getConnection();
 			con.setAutoCommit(false);
 			deleteVideo = con.setSavepoint("SAVEPOINT");
 			
-			String sql = "delete from videos where id=?";
-			pst = con.prepareStatement(sql);
+		
+			String refArtifact = "delete from video_artifacts where video_id=?";
+			pst = con.prepareStatement(refArtifact);
 			pst.setInt(1, videoId);
 			int count = pst.executeUpdate();
 			
 			System.out.println("Selected Value: "+videoId);
-			pst.close();
-			
-			String refArtifact = "delete from video_artifacts where video_id=?";
-			pst = con.prepareStatement(refArtifact);
-			pst.setInt(1, videoId);
-			pst.executeUpdate();
 			pst.close();
 			
 			String sqlprogram = "delete from video_programs where video_id=?";
@@ -149,6 +149,12 @@ public class InsertAllVideoDAO {
 			pst.executeUpdate();
 			pst.close();
 			
+			String sql = "delete from videos where id=?";
+			pst = con.prepareStatement(sql);
+			pst.setInt(1, videoId);
+			pst.executeUpdate();
+			pst.close();
+			
 			if (count == 1) {
 				result = true;
 			}
@@ -158,7 +164,11 @@ public class InsertAllVideoDAO {
 		catch (SQLException e) {
 			
 			e.printStackTrace();
-			con.rollback(deleteVideo);
+			try {
+				con.rollback(deleteVideo);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			throw new DBException(MessageConstants.delete_video);
 		} finally {
 			try {

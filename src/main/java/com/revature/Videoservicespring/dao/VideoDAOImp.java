@@ -14,20 +14,26 @@ import org.springframework.stereotype.Repository;
 
 import com.revature.Videoservicespring.exception.DBException;
 import com.revature.Videoservicespring.model.Video;
+import com.revature.Videoservicespring.util.ConnectionUtil;
 import com.revature.Videoservicespring.util.MessageConstants;
 
 @Repository
 public class VideoDAOImp implements VideoDAO {
-	@Autowired
-	private DataSource datasource;
+	//@Autowired
+	//private DataSource datasource;
 	Connection con = null;
 	PreparedStatement pst = null;
 	Boolean result = false;
+	private ConnectionUtil connection;
+	
+	public VideoDAOImp(ConnectionUtil conobj) {
+		this.connection=conobj;
+	}
 
 	public Boolean insertVideo(Video video) throws DBException, SQLException {
 		
 		try {
-			con = datasource.getConnection();
+			con = ConnectionUtil.getConnection();
 			String sql = "insert into videos(name, display_name, vimeo_video_url, tags, description, transcript, level_id, category_id)values(?,?,?,?,?,?,?,?)";
 			pst = con.prepareStatement(sql);
 			pst.setString(1, video.getVideoName());
@@ -60,7 +66,7 @@ public class VideoDAOImp implements VideoDAO {
 		List<Video> list = null;
 		
 		try {
-			con = datasource.getConnection();
+			con = ConnectionUtil.getConnection();
 			String sql = "select id,name,display_name,vimeo_video_url,status from videos limit 20";
 			pst = con.prepareStatement(sql);
 			rs = pst.executeQuery();
@@ -109,7 +115,7 @@ public class VideoDAOImp implements VideoDAO {
 		List<Video> list = null;
 		
 		try {
-			con = datasource.getConnection();
+			con = ConnectionUtil.getConnection();
 			String sql = "select id,name,display_name,vimeo_video_url,status from videos where status=?";
 			pst = con.prepareStatement(sql);
 			pst.setBoolean(1, status);
@@ -135,6 +141,8 @@ public class VideoDAOImp implements VideoDAO {
 		return list;
 
 	}
+	
+	//List active or inactive videos
 	
 	private Video setActiveVideos(ResultSet rs) throws SQLException {
 		Video videos = null;

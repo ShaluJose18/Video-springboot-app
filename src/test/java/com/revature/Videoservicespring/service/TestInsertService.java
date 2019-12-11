@@ -1,73 +1,61 @@
 package com.revature.Videoservicespring.service;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotNull;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import com.revature.Videoservicespring.dto.VideoDTO;
 import com.revature.Videoservicespring.exception.ServiceException;
-import com.revature.Videoservicespring.model.ReferenceArtifact;
-import com.revature.Videoservicespring.model.ReferenceUrl;
-import com.revature.Videoservicespring.model.SampleProgram;
-import com.revature.Videoservicespring.model.Video;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-@SpringBootTest
+
 public class TestInsertService {
 
 	@Autowired
 	InsertAllVideoService insertion;
 	
+	
+	
 	@Test
 	void addVideo() throws ServiceException, SQLException {
 		
 		boolean value=false;
-		Video video=new Video();
-		ReferenceArtifact artifact=new ReferenceArtifact();
-		SampleProgram program=new SampleProgram();
-		ReferenceUrl url=new ReferenceUrl();
 		
 		VideoDTO videodto=new VideoDTO();
-		video.setCategory_id(1);
-		video.setDescription("core java");
-		video.setDisplayName("core java");
-		video.setId(8);
-		video.setLevel_id(2);
-		video.setStatus(true);
-		video.setTags("java");
-		video.setTranscript("corejava/56789");
-		video.setVideoName("Java Servlet");
-		videodto.setVideo(video);
+
+//		video.setVideoName("Java Servlet");
+//		videodto.setVideo(video);
+		videodto.getVideo().setId(7);
+		videodto.getVideo().setVideoName("python");
+		videodto.getVideo().setDisplayName("python programming");
+		videodto.getVideo().setVimeoVideoUrl("vimeo/345678");
+		videodto.getVideo().setTags("java");
+		videodto.getVideo().setDescription("programming");
+		videodto.getVideo().setTranscript("python2345678");
+		videodto.getVideo().setLevel_id(2);
+		videodto.getVideo().setCategory_id(1);
 		
-		artifact.setId(5);
-		artifact.setName("java");
-		artifact.setArtifact("java");
-		artifact.setDescription("java");
-		artifact.setVideo_id(8);
-		videodto.setArtifact(artifact);
+		videodto.getArtifact().setId(3);
+		videodto.getArtifact().setName("python");
+		videodto.getArtifact().setArtifact("artifact");
+		videodto.getArtifact().setDescription("python34567");
+		videodto.getArtifact().setVideo_id(7);
 		
-		program.setId(5);
-		program.setName("java");
-		program.setArtifact("java");
-		program.setDescription("java");
-		program.setVideo_id(8);
-		videodto.setSampleprogram(program);
+		videodto.getSampleprogram().setId(3);
+		videodto.getSampleprogram().setName("program");
+		videodto.getSampleprogram().setArtifact("python");
+		videodto.getSampleprogram().setDescription("pythonprogramming");
+		videodto.getSampleprogram().setVideo_id(7);
 		
-		url.setId(5);
-		url.setName("java");
-		url.setArtifact("java");
-		url.setDescription("java");
-		url.setType("tutorial");
-		url.setVideo_id(8);
-		videodto.setUrl(url);
+		videodto.getUrl().setId(3);
+		videodto.getUrl().setName("url");
+		videodto.getUrl().setArtifact("javaurl");
+		videodto.getUrl().setDescription("java video");
+		videodto.getUrl().setType("javatutorial");
+		videodto.getUrl().setVideo_id(7);
 		
 		value=insertion.insertVideo(videodto);
-		assertTrue(value);
+		assertNotNull(value);
 		
 	}
 	
