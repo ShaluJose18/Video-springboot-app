@@ -33,8 +33,8 @@ public class TestServiceMockito {
 	@Test
 	public void testListvideos() {
 
-		List<Video> listService = new ArrayList<Video>(); // Service
-		List<Video> listDAO = new ArrayList<Video>(); // DAO
+		List<Video> listService = new ArrayList<Video>(); 	// Service
+		List<Video> listDAO = new ArrayList<Video>(); 		// DAO
 		try {
 
 			Video videoObj = new Video();
