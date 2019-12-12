@@ -2,12 +2,12 @@ package com.revature.Videoservicespring.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//import static org.junit.Assert.assertNotNull;
-//import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.SQLException;
 import java.util.List;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import com.revature.Videoservicespring.dao.InsertAllVideoDAO;
 import com.revature.Videoservicespring.dao.VideoDAOImp;
@@ -19,20 +19,20 @@ import com.revature.Videoservicespring.model.SampleProgram;
 import com.revature.Videoservicespring.model.Video;
 import com.revature.Videoservicespring.util.ConnectionUtil;
 
-class TestJunit {
+public class TestJunit {
 
 	ListAllVideoService listAllVideos = new ListAllVideoService(new VideoDAOImp(new ConnectionUtil()));
 	InsertAllVideoService insertVideo=new InsertAllVideoService(new InsertAllVideoDAO(new ConnectionUtil()));
 
 	@Test
-	void listVideos() throws ServiceException, SQLException {
+	public void listVideos() throws ServiceException, SQLException {
 		List<Video> video = null;
 		video = listAllVideos.listAll();
 		assertNotNull(video);
 	}
 
 	@Test
-	void listActiveVideo() throws ServiceException {
+	public void listActiveVideo() throws ServiceException {
 		boolean status = true;
 		List<Video> video = null;
 		video = listAllVideos.listActiveVideos(status);
@@ -40,7 +40,7 @@ class TestJunit {
 	}
 
 	@Test
-	void listDeactiveVideo() throws ServiceException {
+	public void listDeactiveVideo() throws ServiceException {
 		boolean status = false;
 		List<Video> video = null;
 		video = listAllVideos.listActiveVideos(status);
@@ -48,7 +48,7 @@ class TestJunit {
 	}
 	
 	@Test
-	void insertVideoTest() {
+	public void insertVideoTest() {
 		
 		boolean check=false;
 		VideoDTO videodto=new VideoDTO();
@@ -101,8 +101,8 @@ class TestJunit {
 		
 	}
 	
-	@Test//(expected = ServiceException.class)
-	void insertVideoInvalidTest() throws ServiceException, SQLException {
+	@Test(expected = ServiceException.class)
+	public void insertVideoInvalidTest() throws ServiceException, SQLException {
 		
 		boolean check=false;
 		VideoDTO videodto=new VideoDTO();
