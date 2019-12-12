@@ -20,6 +20,11 @@ public class InsertAllVideoService {
 		@Autowired
 		private InsertAllVideoDAO videoRepository; 
 		
+		public InsertAllVideoService(InsertAllVideoDAO insertion) {
+			this.videoRepository=insertion;
+			
+		}
+		
 		public Boolean insertVideo(VideoDTO videodto) throws ServiceException, SQLException
 		{
 			Video video=new Video(); 

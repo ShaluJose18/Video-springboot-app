@@ -6,9 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Savepoint;
 
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.dao.DataIntegrityViolationException;
 
@@ -20,8 +17,8 @@ import com.revature.Videoservicespring.util.MessageConstants;
 @Repository
 public class InsertAllVideoDAO {
 
-	@Autowired
-	private DataSource datasource;
+//	@Autowired
+//	private DataSource datasource;
 	Connection con = null;
 	PreparedStatement pst = null;
 	Boolean result = false;
@@ -29,14 +26,14 @@ public class InsertAllVideoDAO {
 	Savepoint deleteVideo=null;
 	
 	private ConnectionUtil connection;
-	public InsertAllVideoDAO(ConnectionUtil connection) {
-		this.connection=connection;
+	public InsertAllVideoDAO(ConnectionUtil connect) {
+		this.connection=connect;
 	}
 
 	public boolean newVideo(VideoDTO videodto) throws SQLException, DBException {
 		
 		try {
-			con = datasource.getConnection();
+			con = ConnectionUtil.getConnection();
 			con.setAutoCommit(false);
 			newVideo = con.setSavepoint("SAVEPOINT");
 			
@@ -124,7 +121,7 @@ public class InsertAllVideoDAO {
 	public boolean deleteVideo(int videoId) throws DBException {
 		
 		try {
-			con = datasource.getConnection();
+			con = ConnectionUtil.getConnection();
 			con.setAutoCommit(false);
 			deleteVideo = con.setSavepoint("SAVEPOINT");
 			
