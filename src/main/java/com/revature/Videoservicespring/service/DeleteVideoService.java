@@ -13,7 +13,12 @@ import com.revature.Videoservicespring.util.MessageConstants;
 public class DeleteVideoService {
 
 	@Autowired
-	private InsertAllVideoDAO videoRepository; 
+	private InsertAllVideoDAO videoRepository;
+	
+	public DeleteVideoService(InsertAllVideoDAO deletion) {
+		
+		this.videoRepository=deletion;
+	}
 	
 	public boolean deleteVideo(int videoId) throws ServiceException {
 		boolean result=false;

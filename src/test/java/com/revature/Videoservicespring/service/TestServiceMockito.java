@@ -1,27 +1,26 @@
 package com.revature.Videoservicespring.service;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
+
 import com.revature.Videoservicespring.dao.VideoDAOImp;
 import com.revature.Videoservicespring.exception.DBException;
 import com.revature.Videoservicespring.exception.ServiceException;
 import com.revature.Videoservicespring.model.Video;
 
 @RunWith(MockitoJUnitRunner.class)
-class TestServiceMockito {
+public class TestServiceMockito {
 
 	@InjectMocks
 	ListAllVideoService listallVideos;
@@ -29,10 +28,7 @@ class TestServiceMockito {
 	@Mock
 	VideoDAOImp videodao;
 
-	@Before
-	public void init() {
-		MockitoAnnotations.initMocks(this);
-	}
+	
 
 	@Test
 	public void testListvideos() {
@@ -43,14 +39,18 @@ class TestServiceMockito {
 
 			Video videoObj = new Video();
 			videoObj.setId(1);
+			videoObj.setVideoName(".Net");
 			videoObj.setDisplayName("corejava");
+			videoObj.setTags(".net");
+			videoObj.setCategory_id(1);
+			videoObj.setLevel_id(2);
 			listDAO.add(videoObj);
-
-			listService = listallVideos.listAll();
+			
+			System.out.println(listDAO);
 			when(videodao.listVideos()).thenReturn(listDAO);
-			when(listallVideos.listAll()).thenReturn(listService);
-			assertEquals(listService, listallVideos.listAll());
-			assertNotNull(listService);
+			listService=listallVideos.listAll();
+			assertEquals(listService,listDAO);
+			
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -60,5 +60,35 @@ class TestServiceMockito {
 		}
 
 	}
+	
+	@Test
+	public void testActiveList() {
+		
+		List<Video> listService = new ArrayList<Video>(); // Service
+		List<Video> listDAO = new ArrayList<Video>(); // DAO
+		try {
+
+			Video videoObj = new Video();
+			videoObj.setId(1);
+			videoObj.setVideoName(".Net");
+			videoObj.setDisplayName("corejava");
+			videoObj.setStatus(false);
+			listDAO.add(videoObj);
+			
+			System.out.println(listDAO);
+			when(videodao.listVideos()).thenReturn(listDAO);
+			listService=listallVideos.listAll();
+			assertEquals(listService,listDAO);
+			
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (DBException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
 
 }
