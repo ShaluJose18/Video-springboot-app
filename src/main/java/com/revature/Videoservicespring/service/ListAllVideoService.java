@@ -30,7 +30,7 @@ public class ListAllVideoService {
 		List<Video> videos=null;
 		try {
 			videos=listAllVideos.listVideos();
-		} catch (Exception e) {
+		} catch (DBException e) {
 			e.printStackTrace();
 			throw new SQLException("Unable to list Videos");
 		}

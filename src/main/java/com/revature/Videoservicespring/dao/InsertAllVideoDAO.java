@@ -25,10 +25,6 @@ public class InsertAllVideoDAO {
 	Savepoint newVideo = null;
 	Savepoint deleteVideo=null;
 	
-	private ConnectionUtil connection;
-	public InsertAllVideoDAO(ConnectionUtil connect) {
-		this.connection=connect;
-	}
 
 	public boolean newVideo(VideoDTO videodto) throws SQLException, DBException {
 		

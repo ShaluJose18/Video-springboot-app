@@ -17,12 +17,11 @@ import com.revature.Videoservicespring.model.ReferenceArtifact;
 import com.revature.Videoservicespring.model.ReferenceUrl;
 import com.revature.Videoservicespring.model.SampleProgram;
 import com.revature.Videoservicespring.model.Video;
-import com.revature.Videoservicespring.util.ConnectionUtil;
 
 public class TestJunit {
 
-	ListAllVideoService listAllVideos = new ListAllVideoService(new VideoDAOImp(new ConnectionUtil()));
-	InsertAllVideoService insertVideo=new InsertAllVideoService(new InsertAllVideoDAO(new ConnectionUtil()));
+	ListAllVideoService listAllVideos = new ListAllVideoService(new VideoDAOImp());
+	InsertAllVideoService insertVideo=new InsertAllVideoService(new InsertAllVideoDAO());
 
 	@Test
 	public void listVideos() throws ServiceException, SQLException {

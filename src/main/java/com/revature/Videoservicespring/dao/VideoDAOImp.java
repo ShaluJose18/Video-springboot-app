@@ -6,10 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.revature.Videoservicespring.exception.DBException;
@@ -24,11 +20,6 @@ public class VideoDAOImp implements VideoDAO {
 	Connection con = null;
 	PreparedStatement pst = null;
 	Boolean result = false;
-	private ConnectionUtil connection;
-	
-	public VideoDAOImp(ConnectionUtil conobj) {
-		this.connection=conobj;
-	}
 
 	public Boolean insertVideo(Video video) throws DBException, SQLException {
 		
