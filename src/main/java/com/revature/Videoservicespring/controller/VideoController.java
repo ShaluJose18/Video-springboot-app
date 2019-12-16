@@ -73,7 +73,7 @@ public class VideoController {
 		
 	}
 	
-	@GetMapping("{status}")
+	@GetMapping()
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<Video> listActiveVideos(@RequestParam("Status") boolean status) throws ServiceException, SQLException {
 		List<Video> viewResponse =listAllVideos.listActiveVideos(status);

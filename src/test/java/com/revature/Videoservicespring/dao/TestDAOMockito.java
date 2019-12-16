@@ -1,7 +1,5 @@
 package com.revature.Videoservicespring.dao;
 
-import static org.mockito.Mockito.when;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -41,10 +38,12 @@ public class TestDAOMockito {
 	
 	@Before
 	public void setUp() throws SQLException {
-		//MockitoAnnotations.initMocks(this);
-		when(connection.getConnection()).thenReturn(con);
-		when(con.prepareStatement(Mockito.anyString())).thenReturn(pst);
-		when(pst.executeQuery()).thenReturn(rs);
+		MockitoAnnotations.initMocks(this);
+		
+		Mockito.lenient().when(connection.getConnection()).thenReturn(con);
+		Mockito.lenient().when(con.prepareStatement(Mockito.anyString())).thenReturn(pst);
+		Mockito.lenient().when(pst.executeQuery()).thenReturn(rs);
+		Mockito.lenient().when(rs.next()).thenReturn(Boolean.TRUE);
 	}
 	
 	@Test
