@@ -1,0 +1,45 @@
+
+:toc: left
+:sectnums:
+
+== Video API
+Collection of CRUD API endpoints used to manipulate videos created in the application.
+
+
+
+== Get Videos
+
+.request
+include::{snippets}/videos/list/http-request.adoc[]
+
+.Response
+include::{snippets}/videos/list/http-response.adoc[]
+
+.CURL
+include::{snippets}/videos/list/curl-request.adoc[]
+
+.Request-Body
+include::{snippets}/videos/list/http-request.adoc[]
+
+.Response-Body
+include::{snippets}/videos/list/http-request.adoc[]
+
+
+
+== Get Video By Status
+
+.request
+include::{snippets}/videos/status/http-request.adoc[]
+
+.Response
+include::{snippets}/videos/status/http-response.adoc[]
+
+.CURL
+include::{snippets}/videos/status/curl-request.adoc[]
+
+.Request-Body
+include::{snippets}/videos/status/http-request.adoc[]
+
+.Response-Body
+include::{snippets}/videos/status/http-request.adoc[]
+

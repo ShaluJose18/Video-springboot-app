@@ -6,7 +6,9 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +31,7 @@ import com.revature.Videoservicespring.service.ListAllVideoService;
 public class TestVideoController {
 
 	@Rule
-	  public final JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("RESTDOC");
+	  public final JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("target/generated-snippets");
 	
 	private MockMvc mockMvc;
 	
@@ -50,12 +52,26 @@ public class TestVideoController {
 	@Test
 	public void testListAll() throws Exception {
 		List<Video> list=new ArrayList<Video>();
+		Video video=new Video();
+		video.setId(1);
+		video.setVideoName("java");
+		video.setDisplayName("Java");
+		video.setTags("java");
+		video.setDescription("core java");
+		video.setTranscript("java345678");
+		video.setVimeoVideoUrl("vimeo/url/3456789");
+		video.setStatus(true);
+		video.setCategory_id(1);
+		video.setLevel_id(2);
+		list.add(video);
 		when(listAllVideos.listAll()).thenReturn(list);
 		
 		this.mockMvc.perform(get("/videos/list"))
 		.andExpect(status().isOk())
 		.andExpect(content().contentType("application/json"))
-		.andDo(document("videos"));
+		.andDo(document("videos/list"))
+		.andDo(document ("videos",preprocessRequest(prettyPrint()),
+		preprocessResponse(prettyPrint())));
 	}
 	
 	@Test
@@ -63,10 +79,17 @@ public class TestVideoController {
 		List<Video> list=new ArrayList<Video>();
 		when(listAllVideos.listActiveVideos(Mockito.anyBoolean())).thenReturn(list);
 		
-		this.mockMvc.perform(get("/videos/?Status=true"))
+		this.mockMvc.perform(get("/videos?status=true"))
 		.andExpect(status().isOk())
 		.andExpect(content().contentType("application/json"))
-		.andDo(document("videos"));
+		.andDo(document("videos/status"))
+		.andDo(document ("videos",preprocessRequest(prettyPrint()),
+	    preprocessResponse(prettyPrint())));
+	}
+	
+	@Test
+	public void testInsertVideos() {
+		
 	}
 
 }

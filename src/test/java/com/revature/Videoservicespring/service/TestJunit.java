@@ -1,7 +1,5 @@
 package com.revature.Videoservicespring.service;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
