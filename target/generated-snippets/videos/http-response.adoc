@@ -1,0 +1,19 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 259
+
+[ {
+  "id" : 1,
+  "videoName" : "java",
+  "displayName" : "Java",
+  "tags" : "java",
+  "vimeoVideoUrl" : "vimeo/url/3456789",
+  "description" : "core java",
+  "transcript" : "java345678",
+  "level_id" : 2,
+  "category_id" : 1,
+  "status" : true
+} ]
+----
