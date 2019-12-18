@@ -1,0 +1,44 @@
+[source,http,options="nowrap"]
+----
+POST /videos HTTP/1.1
+Content-Type: application/json
+Host: revature.com
+Content-Length: 784
+
+{
+  "video" : {
+    "id" : 13,
+    "videoName" : "core java",
+    "displayName" : "java",
+    "tags" : "java",
+    "vimeoVideoUrl" : "vimeo/url/45674328",
+    "description" : "corejava",
+    "transcript" : "video563445678",
+    "level_id" : 1,
+    "category_id" : 2,
+    "status" : true
+  },
+  "artifact" : {
+    "id" : 7,
+    "name" : "corejava",
+    "artifact" : "artifact1",
+    "description" : "javavideo",
+    "video_id" : 13
+  },
+  "sampleprogram" : {
+    "id" : 7,
+    "name" : "corejava",
+    "artifact" : "program1",
+    "description" : "sampleprogram",
+    "video_id" : 13
+  },
+  "url" : {
+    "id" : 7,
+    "name" : "corejava",
+    "artifact" : "url1",
+    "description" : "urldescription",
+    "type" : "other",
+    "video_id" : 13
+  }
+}
+----

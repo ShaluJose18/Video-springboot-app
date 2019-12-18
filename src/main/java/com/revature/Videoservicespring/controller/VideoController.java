@@ -56,7 +56,7 @@ public class VideoController {
 
 		try {
 			videoService.insertVideo(videodto);
-			return new ResponseEntity<>(HttpStatus.CREATED);
+			return new ResponseEntity<>(HttpStatus.OK);
 
 		} catch (ServiceException e) {
 			Message message = new Message(e.getMessage());
@@ -89,7 +89,7 @@ public class VideoController {
 	public ResponseEntity<?> deleteByVideo(@PathVariable("id") Integer videoId) throws ServiceException {
 
 		deletevideo.deleteVideo(videoId);
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		return new ResponseEntity<>("video deleted",HttpStatus.OK);
 
 	}
 }

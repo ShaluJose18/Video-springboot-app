@@ -1,9 +1,8 @@
 
+= Video Documentation
+:source-highlighter: highlightjs
 :toc: left
 :sectnums:
-
-== Video API
-Collection of CRUD API endpoints used to manipulate videos created in the application.
 
 
 
@@ -18,11 +17,9 @@ include::{snippets}/videos/list/http-response.adoc[]
 .CURL
 include::{snippets}/videos/list/curl-request.adoc[]
 
-.Request-Body
-include::{snippets}/videos/list/http-request.adoc[]
 
 .Response-Body
-include::{snippets}/videos/list/http-request.adoc[]
+include::{snippets}/videos/list/response-body.adoc[]
 
 
 
@@ -38,8 +35,48 @@ include::{snippets}/videos/status/http-response.adoc[]
 include::{snippets}/videos/status/curl-request.adoc[]
 
 .Request-Body
-include::{snippets}/videos/status/http-request.adoc[]
+include::{snippets}/videos/status/request-body.adoc[]
 
 .Response-Body
-include::{snippets}/videos/status/http-request.adoc[]
+include::{snippets}/videos/status/response-body.adoc[]
+
+
+== Post Video 
+
+.request
+include::{snippets}/videos/new/http-request.adoc[]
+
+.Response
+include::{snippets}/videos/new/http-response.adoc[]
+
+.CURL
+include::{snippets}/videos/new/curl-request.adoc[]
+
+.Request-Body
+include::{snippets}/videos/new/request-body.adoc[]
+
+.Response-Body
+include::{snippets}/videos/new/response-body.adoc[]
+
+.request-fields
+include::{snippets}/videos/new/request-fields.adoc[]
+
+
+== Delete Video 
+
+.request
+include::{snippets}/videos/delete/http-request.adoc[]
+
+.Response
+include::{snippets}/videos/delete/http-response.adoc[]
+
+.CURL
+include::{snippets}/videos/delete/curl-request.adoc[]
+
+.Request-Body
+include::{snippets}/videos/delete/request-body.adoc[]
+
+.Response-Body
+include::{snippets}/videos/delete/response-body.adoc[]
+
 

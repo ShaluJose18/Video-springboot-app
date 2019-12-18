@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.revature.Videoservicespring.service.TestService
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.04 s - in com.revature.Videoservicespring.service.TestService
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.385 s - in com.revature.Videoservicespring.service.TestService

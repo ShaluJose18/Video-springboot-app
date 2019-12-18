@@ -1,4 +1,0 @@
-[source,bash]
-----
-$ http GET 'https://revature.com/videos/list'
-----

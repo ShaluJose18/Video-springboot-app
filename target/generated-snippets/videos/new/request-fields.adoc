@@ -1,0 +1,108 @@
+|===
+|Path|Type|Description
+
+|`+video.id+`
+|`+Number+`
+|id of video
+
+|`+video.videoName+`
+|`+String+`
+|Name of the video
+
+|`+video.displayName+`
+|`+String+`
+|displayName of the video
+
+|`+video.tags+`
+|`+String+`
+|tag name of the video
+
+|`+video.vimeoVideoUrl+`
+|`+String+`
+|url of the video
+
+|`+video.description+`
+|`+String+`
+|description of the video
+
+|`+video.transcript+`
+|`+String+`
+|transcript of the video
+
+|`+video.level_id+`
+|`+Number+`
+|level of the video
+
+|`+video.category_id+`
+|`+Number+`
+|Category of the video
+
+|`+video.status+`
+|`+Boolean+`
+|status of the video
+
+|`+artifact.id+`
+|`+Number+`
+|id of the artifact
+
+|`+artifact.name+`
+|`+String+`
+|Name of the artifact
+
+|`+artifact.artifact+`
+|`+String+`
+|reference artifact
+
+|`+artifact.description+`
+|`+String+`
+|description of the artifact
+
+|`+artifact.video_id+`
+|`+Number+`
+|id of the video
+
+|`+sampleprogram.id+`
+|`+Number+`
+|id of the artifact
+
+|`+sampleprogram.name+`
+|`+String+`
+|name of the program
+
+|`+sampleprogram.artifact+`
+|`+String+`
+|sample program document
+
+|`+sampleprogram.description+`
+|`+String+`
+|description of the artifact
+
+|`+sampleprogram.video_id+`
+|`+Number+`
+|id of the video
+
+|`+url.id+`
+|`+Number+`
+|id of the url
+
+|`+url.name+`
+|`+String+`
+|name of the url
+
+|`+url.artifact+`
+|`+String+`
+|reference url
+
+|`+url.description+`
+|`+String+`
+|description of the url
+
+|`+url.type+`
+|`+String+`
+|type of the url
+
+|`+url.video_id+`
+|`+Number+`
+|id of the video
+
+|===

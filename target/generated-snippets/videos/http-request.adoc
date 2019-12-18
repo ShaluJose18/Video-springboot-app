@@ -1,6 +1,0 @@
-[source,http,options="nowrap"]
-----
-GET /videos/list HTTP/1.1
-Host: revature.com
-
-----
