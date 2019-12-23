@@ -15,9 +15,9 @@ import com.revature.videoservicespring.model.Video;
 @Service
 public class ListAllVideoService {
 
-	@Autowired
 	VideoDAOImp listAllVideos;
 	
+	@Autowired
 	public ListAllVideoService(VideoDAOImp videoDao) {
 		this.listAllVideos=videoDao;
 	}

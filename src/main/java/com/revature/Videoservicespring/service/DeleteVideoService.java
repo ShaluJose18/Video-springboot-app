@@ -12,9 +12,10 @@ import com.revature.videoservicespring.util.MessageConstants;
 @Service
 public class DeleteVideoService {
 
-	@Autowired
+	
 	private InsertAllVideoDAO videoRepository;
 	
+	@Autowired
 	public DeleteVideoService(InsertAllVideoDAO deletion) {
 		
 		this.videoRepository=deletion;

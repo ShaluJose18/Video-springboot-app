@@ -1,6 +1,5 @@
 package com.revature.videoservicespring.controller;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +39,9 @@ public class VideoController {
 	private DeleteVideoService deletevideo;
 
 	/**
-	 * This method is used to add a new video takes object as parameter returns the
-	 * success or failure message
-	 * 
-	 * @throws SQLException
+	 * This method is used to add a new video 
+	 * takes videodto as parameter 
+	 * returns the success or failure message
 	 * @throws ServiceException on input error
 	 * 
 	 */
@@ -64,6 +62,13 @@ public class VideoController {
 		}
 
 	}
+	
+	
+	/**
+	 * This method for listing all videos
+	 * @return the video list
+	 * @throws ServiceException
+	 */
 
 	@GetMapping("/list")
 	@ResponseStatus(code = HttpStatus.OK)
@@ -73,6 +78,14 @@ public class VideoController {
 
 	}
 
+	
+	/**
+	 * This method listing the active or inactive videos
+	 * @param status is the parameter to listActiveVideos
+	 * @return the videos based on status
+	 * @throws ServiceException on input error
+	 */
+	
 	@GetMapping()
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<Video> listActiveVideos(@RequestParam("status") boolean status) throws ServiceException {
@@ -81,6 +94,14 @@ public class VideoController {
 
 	}
 
+	
+	/**
+	 * This method delete the video based on videoId
+	 * @param videoId
+	 * @return success or failure message
+	 * @throws ServiceException on input error
+	 */
+	
 	@DeleteMapping("{id}")
 	@ApiOperation(value = "videoAPI")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Video deleted", response = String.class),

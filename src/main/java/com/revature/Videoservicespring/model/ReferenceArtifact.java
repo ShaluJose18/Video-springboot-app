@@ -7,9 +7,9 @@ import lombok.Data;
 public class ReferenceArtifact {
 
 	
-	private int id;
+	private Integer id;
 	private String name;
 	private String artifact;
 	private String description;
-	private int video_id;
+	private Integer video_id;
 }

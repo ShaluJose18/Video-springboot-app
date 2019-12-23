@@ -7,10 +7,10 @@ import lombok.Data;
 public class ReferenceUrl {
 
 	
-	private int id;
+	private Integer id;
 	private String name;
 	private String artifact;
 	private String description;
 	private String type;
-	private int video_id;
+	private Integer video_id;
 }
