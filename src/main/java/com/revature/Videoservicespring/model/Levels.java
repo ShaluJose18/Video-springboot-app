@@ -1,4 +1,4 @@
-package com.revature.Videoservicespring.model;
+package com.revature.videoservicespring.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

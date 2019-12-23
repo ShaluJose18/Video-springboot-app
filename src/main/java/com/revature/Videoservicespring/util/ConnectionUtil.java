@@ -1,4 +1,4 @@
-package com.revature.Videoservicespring.util;
+package com.revature.videoservicespring.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

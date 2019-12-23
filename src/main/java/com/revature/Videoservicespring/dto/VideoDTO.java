@@ -1,9 +1,9 @@
-package com.revature.Videoservicespring.dto;
+package com.revature.videoservicespring.dto;
 
-import com.revature.Videoservicespring.model.ReferenceArtifact;
-import com.revature.Videoservicespring.model.ReferenceUrl;
-import com.revature.Videoservicespring.model.SampleProgram;
-import com.revature.Videoservicespring.model.Video;
+import com.revature.videoservicespring.model.ReferenceArtifact;
+import com.revature.videoservicespring.model.ReferenceUrl;
+import com.revature.videoservicespring.model.SampleProgram;
+import com.revature.videoservicespring.model.Video;
 
 import lombok.Data;
 

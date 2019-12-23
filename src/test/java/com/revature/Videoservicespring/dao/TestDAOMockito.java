@@ -1,4 +1,4 @@
-package com.revature.Videoservicespring.dao;
+package com.revature.videoservicespring.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +16,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.revature.Videoservicespring.exception.DBException;
+import com.revature.videoservicespring.dao.VideoDAOImp;
+import com.revature.videoservicespring.exception.DBException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestDAOMockito {

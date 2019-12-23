@@ -1,4 +1,4 @@
-package com.revature.Videoservicespring.controller;
+package com.revature.videoservicespring.controller;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -16,20 +16,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.Videoservicespring.dto.VideoDTO;
-import com.revature.Videoservicespring.exception.ServiceException;
-import com.revature.Videoservicespring.model.Video;
-import com.revature.Videoservicespring.service.DeleteVideoService;
-import com.revature.Videoservicespring.service.InsertAllVideoService;
-import com.revature.Videoservicespring.service.ListAllVideoService;
-import com.revature.Videoservicespring.util.Message;
+import com.revature.videoservicespring.dto.VideoDTO;
+import com.revature.videoservicespring.exception.ServiceException;
+import com.revature.videoservicespring.model.Video;
+import com.revature.videoservicespring.service.DeleteVideoService;
+import com.revature.videoservicespring.service.InsertAllVideoService;
+import com.revature.videoservicespring.service.ListAllVideoService;
+import com.revature.videoservicespring.util.Message;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("/videos")
+@RequestMapping("/video")
 public class VideoController {
 
 	@Autowired
@@ -40,8 +40,8 @@ public class VideoController {
 	private DeleteVideoService deletevideo;
 
 	/**
-	 * This method is used to add a new video 
-	 * takes object as parameter returns the success or failure message
+	 * This method is used to add a new video takes object as parameter returns the
+	 * success or failure message
 	 * 
 	 * @throws SQLException
 	 * @throws ServiceException on input error
@@ -52,7 +52,7 @@ public class VideoController {
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Video created", response = String.class),
 			@ApiResponse(code = 400, message = "Invalid video", response = Video.class) })
 
-	public ResponseEntity<?> addVideos(@RequestBody VideoDTO videodto) throws SQLException {
+	public ResponseEntity<?> addVideos(@RequestBody VideoDTO videodto) {
 
 		try {
 			videoService.insertVideo(videodto);
@@ -60,36 +60,36 @@ public class VideoController {
 
 		} catch (ServiceException e) {
 			Message message = new Message(e.getMessage());
-			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 	}
-	
+
 	@GetMapping("/list")
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<Video> listVideos() throws ServiceException, SQLException {
-		List<Video> viewResponse =listAllVideos.listAll();
+	public List<Video> listVideos() throws ServiceException {
+		List<Video> viewResponse = listAllVideos.listAll();
 		return viewResponse;
-		
+
 	}
-	
+
 	@GetMapping()
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<Video> listActiveVideos(@RequestParam("status") boolean status) throws ServiceException, SQLException {
-		List<Video> viewResponse =listAllVideos.listActiveVideos(status);
+	public List<Video> listActiveVideos(@RequestParam("status") boolean status) throws ServiceException {
+		List<Video> viewResponse = listAllVideos.listActiveVideos(status);
 		return viewResponse;
-		
+
 	}
-	
+
 	@DeleteMapping("{id}")
 	@ApiOperation(value = "videoAPI")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Video deleted", response = String.class),
 			@ApiResponse(code = 400, message = "Invalid Video", response = Video.class) })
-	
+
 	public ResponseEntity<?> deleteByVideo(@PathVariable("id") Integer videoId) throws ServiceException {
 
 		deletevideo.deleteVideo(videoId);
-		return new ResponseEntity<>("video deleted",HttpStatus.OK);
+		return new ResponseEntity<>("video deleted", HttpStatus.OK);
 
 	}
 }

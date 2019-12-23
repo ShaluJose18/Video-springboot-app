@@ -1,4 +1,4 @@
-package com.revature.Videoservicespring.dao;
+package com.revature.videoservicespring.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,12 +7,11 @@ import java.sql.SQLException;
 import java.sql.Savepoint;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.dao.DataIntegrityViolationException;
 
-import com.revature.Videoservicespring.dto.VideoDTO;
-import com.revature.Videoservicespring.exception.DBException;
-import com.revature.Videoservicespring.util.ConnectionUtil;
-import com.revature.Videoservicespring.util.MessageConstants;
+import com.revature.videoservicespring.dto.VideoDTO;
+import com.revature.videoservicespring.exception.DBException;
+import com.revature.videoservicespring.util.ConnectionUtil;
+import com.revature.videoservicespring.util.MessageConstants;
 
 @Repository
 public class InsertAllVideoDAO {
@@ -26,7 +25,7 @@ public class InsertAllVideoDAO {
 	Savepoint deleteVideo=null;
 	
 
-	public boolean newVideo(VideoDTO videodto) throws SQLException, DBException {
+	public boolean newVideo(VideoDTO videodto) throws DBException {
 		
 		try {
 			con = ConnectionUtil.getConnection();
@@ -47,6 +46,7 @@ public class InsertAllVideoDAO {
 			pst.close();
 
 			String selectVideoId = "select last_insert_id()";
+			
 			pst = con.prepareStatement(selectVideoId);
 			ResultSet rs = pst.executeQuery();
 
@@ -90,18 +90,22 @@ public class InsertAllVideoDAO {
 			con.commit();
 			
 		}
-		catch (DataIntegrityViolationException e) {
-			
-	        System.out.println("Video name already exist");
-	    }
+//		catch (DataIntegrityViolationException e) {
+//			
+//	        System.out.println("Video name already exist");
+//	    }
 		catch (SQLException e) {
 			
 			e.getMessage().contains("uk_videos");
 			String message = e.getMessage();
 			System.out.println(message);
-			//e.printStackTrace();
-			con.rollback(newVideo);
-			throw new DataIntegrityViolationException(MessageConstants.video_exist);
+			try {
+				con.rollback(newVideo);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+				throw new DBException(MessageConstants.video_exist);
+			}
+			
 		} finally {
 			try {
 				

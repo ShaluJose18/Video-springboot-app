@@ -1,4 +1,4 @@
-package com.revature.Videoservicespring.dto;
+package com.revature.videoservicespring.dto;
 
 import lombok.Data;
 

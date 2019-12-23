@@ -1,4 +1,4 @@
-package com.revature.Videoservicespring.service;
+package com.revature.videoservicespring.service;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
@@ -10,9 +10,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.revature.Videoservicespring.dao.InsertAllVideoDAO;
-import com.revature.Videoservicespring.exception.DBException;
-import com.revature.Videoservicespring.exception.ServiceException;
+import com.revature.videoservicespring.dao.InsertAllVideoDAO;
+import com.revature.videoservicespring.exception.DBException;
+import com.revature.videoservicespring.exception.ServiceException;
+import com.revature.videoservicespring.service.DeleteVideoService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestDeletionMockito {

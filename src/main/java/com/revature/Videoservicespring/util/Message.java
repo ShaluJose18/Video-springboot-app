@@ -1,4 +1,4 @@
-package com.revature.Videoservicespring.util;
+package com.revature.videoservicespring.util;
 
 public class Message {
 	

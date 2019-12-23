@@ -1,6 +1,5 @@
-package com.revature.Videoservicespring.service;
+package com.revature.videoservicespring.service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -8,10 +7,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.Videoservicespring.dao.VideoDAOImp;
-import com.revature.Videoservicespring.exception.DBException;
-import com.revature.Videoservicespring.exception.ServiceException;
-import com.revature.Videoservicespring.model.Video;
+import com.revature.videoservicespring.dao.VideoDAOImp;
+import com.revature.videoservicespring.exception.DBException;
+import com.revature.videoservicespring.exception.ServiceException;
+import com.revature.videoservicespring.model.Video;
 
 @Service
 public class ListAllVideoService {
@@ -25,14 +24,14 @@ public class ListAllVideoService {
 	
 
 	@Transactional
-	public List<Video> listAll() throws ServiceException, SQLException
+	public List<Video> listAll() throws ServiceException
 	{
 		List<Video> videos=null;
 		try {
 			videos=listAllVideos.listVideos();
 		} catch (DBException e) {
 			e.printStackTrace();
-			throw new SQLException("Unable to list Videos");
+			throw new ServiceException("Unable to list Videos");
 		}
 		System.out.println("list"+videos);
 		return videos;

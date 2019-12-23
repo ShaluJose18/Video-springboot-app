@@ -1,23 +1,21 @@
-package com.revature.Videoservicespring.controller;
+package com.revature.videoservicespring.controller;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.snippet.Attributes.key;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
-
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
-import static org.springframework.restdocs.snippet.Attributes.key;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,14 +34,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.Videoservicespring.dto.VideoDTO;
-import com.revature.Videoservicespring.model.ReferenceArtifact;
-import com.revature.Videoservicespring.model.ReferenceUrl;
-import com.revature.Videoservicespring.model.SampleProgram;
-import com.revature.Videoservicespring.model.Video;
-import com.revature.Videoservicespring.service.DeleteVideoService;
-import com.revature.Videoservicespring.service.InsertAllVideoService;
-import com.revature.Videoservicespring.service.ListAllVideoService;
+import com.revature.videoservicespring.dto.VideoDTO;
+import com.revature.videoservicespring.model.ReferenceArtifact;
+import com.revature.videoservicespring.model.ReferenceUrl;
+import com.revature.videoservicespring.model.SampleProgram;
+import com.revature.videoservicespring.model.Video;
+import com.revature.videoservicespring.service.DeleteVideoService;
+import com.revature.videoservicespring.service.InsertAllVideoService;
+import com.revature.videoservicespring.service.ListAllVideoService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestVideoController {
@@ -94,9 +92,9 @@ public class TestVideoController {
 		list.add(video);
 		when(listAllVideos.listAll()).thenReturn(list);
 
-		this.mockMvc.perform(get("/videos/list")).andExpect(status().isOk())
+		this.mockMvc.perform(get("/video/list")).andExpect(status().isOk())
 				.andExpect(content().contentType("application/json"))
-				.andDo(document("videos/list", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
+				.andDo(document("video/list", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
 	}
 
 	@Test
@@ -104,9 +102,9 @@ public class TestVideoController {
 		List<Video> list = new ArrayList<Video>();
 		when(listAllVideos.listActiveVideos(Mockito.anyBoolean())).thenReturn(list);
 
-		this.mockMvc.perform(get("/videos?status=true")).andExpect(status().isOk())
+		this.mockMvc.perform(get("/video?status=true")).andExpect(status().isOk())
 				.andExpect(content().contentType("application/json"))
-				.andDo(document("videos/status", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
+				.andDo(document("video/status", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
 		
 	}
 
@@ -155,10 +153,10 @@ public class TestVideoController {
 
 		String videoJson = objectmapper.writeValueAsString(videodto);
 		when(insertVideo.insertVideo(videodto)).thenReturn(true);
-		this.mockMvc.perform(post("/videos").contentType(MediaType.APPLICATION_JSON).content(videoJson))
+		this.mockMvc.perform(post("/video").contentType(MediaType.APPLICATION_JSON).content(videoJson))
 				
 				.andDo(print())
-				.andDo(document("videos/new", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
+				.andDo(document("video/new", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
 
 						requestFields(
 								fieldWithPath("video.id").description("id of video")
@@ -222,9 +220,9 @@ public class TestVideoController {
 	public void testDeleteVideos() throws Exception {
 
 		when(deleteVideo.deleteVideo(Mockito.anyInt())).thenReturn(true);
-		this.mockMvc.perform(delete("/videos/5")).andExpect(status().isOk())
+		this.mockMvc.perform(delete("/video/5")).andExpect(status().isOk())
 				.andExpect(content().string("video deleted")).andDo(print())
-				.andDo(document("videos/delete", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
+				.andDo(document("video/delete", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
 						 parameterWithName("videoId")
 			                .description("delete video based on videoId").attributes(key("required").value(true));
 	}

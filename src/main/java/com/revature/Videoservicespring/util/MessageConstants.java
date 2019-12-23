@@ -1,4 +1,4 @@
-package com.revature.Videoservicespring.util;
+package com.revature.videoservicespring.util;
 
 public class MessageConstants {
 	public static final String video_exist="Video name already exist";

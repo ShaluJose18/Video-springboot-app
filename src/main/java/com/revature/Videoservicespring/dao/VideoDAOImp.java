@@ -1,4 +1,4 @@
-package com.revature.Videoservicespring.dao;
+package com.revature.videoservicespring.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,47 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
-import com.revature.Videoservicespring.exception.DBException;
-import com.revature.Videoservicespring.model.Video;
-import com.revature.Videoservicespring.util.ConnectionUtil;
-import com.revature.Videoservicespring.util.MessageConstants;
+import com.revature.videoservicespring.exception.DBException;
+import com.revature.videoservicespring.model.Video;
+import com.revature.videoservicespring.util.ConnectionUtil;
+import com.revature.videoservicespring.util.MessageConstants;
 
 @Repository
 public class VideoDAOImp implements VideoDAO {
-	//@Autowired
-	//private DataSource datasource;
+	
 	Connection con = null;
 	PreparedStatement pst = null;
 	Boolean result = false;
 
-	public Boolean insertVideo(Video video) throws DBException, SQLException {
-		
-		try {
-			con = ConnectionUtil.getConnection();
-			String sql = "insert into videos(name, display_name, vimeo_video_url, tags, description, transcript, level_id, category_id)values(?,?,?,?,?,?,?,?)";
-			pst = con.prepareStatement(sql);
-			pst.setString(1, video.getVideoName());
-			pst.setString(2, video.getDisplayName());
-			pst.setString(3, video.getVimeoVideoUrl());
-			pst.setString(4, video.getTags());
-			pst.setString(5, video.getDescription());
-			pst.setString(6, video.getTranscript());
-			pst.setInt(7, video.getLevel_id());
-			pst.setInt(8, video.getCategory_id());
-
-			int count = pst.executeUpdate();
-			if (count == 1) {
-				result = true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DBException(MessageConstants.video_exist);
-		} finally {
-			pst.close();
-			con.close();
-		}
-		return result;
-	}
 
 	// Select All videos from Videos
 
@@ -152,5 +123,24 @@ public class VideoDAOImp implements VideoDAO {
 		return videos;
 	}
 	
+	public void updateVideos(int request_id) throws DBException { 
+
+		Connection con = ConnectionUtil.getConnection();
+		String sql = "update videos set status=? where id=?";
+		try {
+
+			pst = con.prepareStatement(sql);
+			pst.setInt(1, request_id);
+
+			pst.executeUpdate();
+			System.out.println("\nYour Request is Closed!!! ");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DBException("Unable to close request", e);
+		} finally {
+			ConnectionUtil.close(con, pst);
+		}
+
+	}
 	
 }

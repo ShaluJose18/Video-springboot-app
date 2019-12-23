@@ -1,4 +1,4 @@
-package com.revature.Videoservicespring.service;
+package com.revature.videoservicespring.service;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
@@ -11,14 +11,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.revature.Videoservicespring.dao.InsertAllVideoDAO;
-import com.revature.Videoservicespring.dto.VideoDTO;
-import com.revature.Videoservicespring.exception.DBException;
-import com.revature.Videoservicespring.exception.ServiceException;
-import com.revature.Videoservicespring.model.ReferenceArtifact;
-import com.revature.Videoservicespring.model.ReferenceUrl;
-import com.revature.Videoservicespring.model.SampleProgram;
-import com.revature.Videoservicespring.model.Video;
+import com.revature.videoservicespring.dao.InsertAllVideoDAO;
+import com.revature.videoservicespring.dto.VideoDTO;
+import com.revature.videoservicespring.exception.DBException;
+import com.revature.videoservicespring.exception.ServiceException;
+import com.revature.videoservicespring.model.ReferenceArtifact;
+import com.revature.videoservicespring.model.ReferenceUrl;
+import com.revature.videoservicespring.model.SampleProgram;
+import com.revature.videoservicespring.model.Video;
+import com.revature.videoservicespring.service.InsertAllVideoService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestInsertionMockito {

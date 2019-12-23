@@ -1,20 +1,21 @@
-package com.revature.Videoservicespring.service;
+package com.revature.videoservicespring.service;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.sql.SQLException;
 import java.util.List;
 import org.junit.Test;
 
-import com.revature.Videoservicespring.dao.InsertAllVideoDAO;
-import com.revature.Videoservicespring.dao.VideoDAOImp;
-import com.revature.Videoservicespring.dto.VideoDTO;
-import com.revature.Videoservicespring.exception.ServiceException;
-import com.revature.Videoservicespring.model.ReferenceArtifact;
-import com.revature.Videoservicespring.model.ReferenceUrl;
-import com.revature.Videoservicespring.model.SampleProgram;
-import com.revature.Videoservicespring.model.Video;
+import com.revature.videoservicespring.dao.InsertAllVideoDAO;
+import com.revature.videoservicespring.dao.VideoDAOImp;
+import com.revature.videoservicespring.dto.VideoDTO;
+import com.revature.videoservicespring.exception.ServiceException;
+import com.revature.videoservicespring.model.ReferenceArtifact;
+import com.revature.videoservicespring.model.ReferenceUrl;
+import com.revature.videoservicespring.model.SampleProgram;
+import com.revature.videoservicespring.model.Video;
+
+
 
 public class TestJunit {
 
@@ -22,7 +23,7 @@ public class TestJunit {
 	InsertAllVideoService insertVideo=new InsertAllVideoService(new InsertAllVideoDAO());
 
 	@Test
-	public void listVideos() throws ServiceException, SQLException {
+	public void listVideos() throws ServiceException {
 		List<Video> video = null;
 		video = listAllVideos.listAll();
 		assertNotNull(video);
@@ -91,7 +92,7 @@ public class TestJunit {
 		
 		try {
 			check=insertVideo.insertVideo(videodto);
-		} catch (ServiceException | SQLException e) {
+		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
 		assertTrue(check);
@@ -99,7 +100,7 @@ public class TestJunit {
 	}
 	
 	@Test(expected = ServiceException.class)
-	public void insertVideoInvalidTest() throws ServiceException, SQLException {
+	public void insertVideoInvalidTest() throws ServiceException {
 		
 		VideoDTO videodto=new VideoDTO();
 		

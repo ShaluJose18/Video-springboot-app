@@ -1,4 +1,4 @@
-package com.revature.Videoservicespring.service;
+package com.revature.videoservicespring.service;
 
 //import org.junit.Test;
 import org.junit.jupiter.api.Test;
@@ -8,8 +8,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.revature.Videoservicespring.exception.ServiceException;
-import com.revature.Videoservicespring.model.Video;
+import com.revature.videoservicespring.exception.ServiceException;
+import com.revature.videoservicespring.model.Video;
+import com.revature.videoservicespring.service.ListAllVideoService;
 
 @SpringBootTest
 public class TestService {

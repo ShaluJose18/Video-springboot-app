@@ -1,4 +1,0 @@
-[source,bash]
-----
-$ curl 'https://revature.com/videos/list' -i -X GET
-----

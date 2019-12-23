@@ -1,4 +1,4 @@
-package com.revature.Videoservicespring.config;
+package com.revature.videoservicespring.config;
 
 public class BeanConfig {
 

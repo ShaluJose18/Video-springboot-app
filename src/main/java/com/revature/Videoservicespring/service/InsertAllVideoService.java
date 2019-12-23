@@ -1,31 +1,30 @@
-package com.revature.Videoservicespring.service;
+package com.revature.videoservicespring.service;
 
-import java.sql.SQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.Videoservicespring.dao.InsertAllVideoDAO;
-import com.revature.Videoservicespring.dto.VideoDTO;
-import com.revature.Videoservicespring.exception.DBException;
-import com.revature.Videoservicespring.exception.ServiceException;
-import com.revature.Videoservicespring.model.ReferenceArtifact;
-import com.revature.Videoservicespring.model.ReferenceUrl;
-import com.revature.Videoservicespring.model.SampleProgram;
-import com.revature.Videoservicespring.model.Video;
-import com.revature.Videoservicespring.util.MessageConstants;
+import com.revature.videoservicespring.dao.InsertAllVideoDAO;
+import com.revature.videoservicespring.dto.VideoDTO;
+import com.revature.videoservicespring.exception.DBException;
+import com.revature.videoservicespring.exception.ServiceException;
+import com.revature.videoservicespring.model.ReferenceArtifact;
+import com.revature.videoservicespring.model.ReferenceUrl;
+import com.revature.videoservicespring.model.SampleProgram;
+import com.revature.videoservicespring.model.Video;
+import com.revature.videoservicespring.util.MessageConstants;
 
 @Service
 public class InsertAllVideoService {
-	
-		@Autowired
+		
 		private InsertAllVideoDAO videoRepository; 
 		
+		@Autowired
 		public InsertAllVideoService(InsertAllVideoDAO insertion) {
 			this.videoRepository=insertion;
 			
 		}
 		
-		public Boolean insertVideo(VideoDTO videodto) throws ServiceException, SQLException
+		public Boolean insertVideo(VideoDTO videodto) throws ServiceException
 		{
 			Video video=new Video(); 
 			Boolean result;

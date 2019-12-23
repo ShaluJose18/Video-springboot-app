@@ -1,6 +1,11 @@
-[source,bash]
+[source,http,options="nowrap"]
 ----
-$ echo '{
+POST /video HTTP/1.1
+Content-Type: application/json
+Host: localhost:9000
+Content-Length: 784
+
+{
   "video" : {
     "id" : 13,
     "videoName" : "core java",
@@ -35,6 +40,5 @@ $ echo '{
     "type" : "other",
     "video_id" : 13
   }
-}' | http POST 'https://revature.com/videos' \
-    'Content-Type:application/json'
+}
 ----

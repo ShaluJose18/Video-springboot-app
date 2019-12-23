@@ -1,6 +1,6 @@
 [source,bash]
 ----
-$ curl 'https://revature.com/videos' -i -X POST \
+$ curl 'http://localhost:9000/video' -i -X POST \
     -H 'Content-Type: application/json' \
     -d '{
   "video" : {

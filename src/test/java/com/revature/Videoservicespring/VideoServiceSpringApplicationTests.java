@@ -1,4 +1,4 @@
-package com.revature.Videoservicespring;
+package com.revature.videoservicespring;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

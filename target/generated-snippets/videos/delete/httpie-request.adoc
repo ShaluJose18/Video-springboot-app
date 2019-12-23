@@ -1,4 +1,0 @@
-[source,bash]
-----
-$ http DELETE 'http://localhost:9000/videos/5'
-----

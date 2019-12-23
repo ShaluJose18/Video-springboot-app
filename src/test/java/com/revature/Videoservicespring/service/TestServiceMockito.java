@@ -1,10 +1,9 @@
-package com.revature.Videoservicespring.service;
+package com.revature.videoservicespring.service;
 
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +13,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.revature.Videoservicespring.dao.VideoDAOImp;
-import com.revature.Videoservicespring.exception.DBException;
-import com.revature.Videoservicespring.exception.ServiceException;
-import com.revature.Videoservicespring.model.Video;
+import com.revature.videoservicespring.dao.VideoDAOImp;
+import com.revature.videoservicespring.exception.DBException;
+import com.revature.videoservicespring.exception.ServiceException;
+import com.revature.videoservicespring.model.Video;
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestServiceMockito {
@@ -53,8 +53,6 @@ public class TestServiceMockito {
 			
 		} catch (ServiceException e) {
 			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} catch (DBException e) {
 			e.printStackTrace();
 		}
@@ -81,8 +79,6 @@ public class TestServiceMockito {
 			assertEquals(listService,listDAO);
 			
 		} catch (ServiceException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (DBException e) {
 			e.printStackTrace();

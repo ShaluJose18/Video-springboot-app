@@ -1,14 +1,15 @@
-package com.revature.Videoservicespring.dao;
+package com.revature.videoservicespring.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
-import com.revature.Videoservicespring.exception.DBException;
-import com.revature.Videoservicespring.model.Video;
+import com.revature.videoservicespring.exception.DBException;
+import com.revature.videoservicespring.model.Video;
 
 public interface VideoDAO {
 	
-	public Boolean insertVideo(Video video) throws DBException, SQLException;
+	
 	public List<Video> listVideos() throws DBException;
+	public List<Video> listActiveVideos( boolean status ) throws DBException;
+	public void updateVideos(int request_id) throws DBException;
 
 }

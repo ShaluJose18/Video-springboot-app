@@ -9,74 +9,74 @@
 == Get Videos
 
 .request
-include::{snippets}/videos/list/http-request.adoc[]
+include::{snippets}/video/list/http-request.adoc[]
 
 .Response
-include::{snippets}/videos/list/http-response.adoc[]
+include::{snippets}/video/list/http-response.adoc[]
 
 .CURL
-include::{snippets}/videos/list/curl-request.adoc[]
+include::{snippets}/video/list/curl-request.adoc[]
 
 
 .Response-Body
-include::{snippets}/videos/list/response-body.adoc[]
+include::{snippets}/video/list/response-body.adoc[]
 
 
 
 == Get Video By Status
 
 .request
-include::{snippets}/videos/status/http-request.adoc[]
+include::{snippets}/video/status/http-request.adoc[]
 
 .Response
-include::{snippets}/videos/status/http-response.adoc[]
+include::{snippets}/video/status/http-response.adoc[]
 
 .CURL
-include::{snippets}/videos/status/curl-request.adoc[]
+include::{snippets}/video/status/curl-request.adoc[]
 
 .Request-Body
-include::{snippets}/videos/status/request-body.adoc[]
+include::{snippets}/video/status/request-body.adoc[]
 
 .Response-Body
-include::{snippets}/videos/status/response-body.adoc[]
+include::{snippets}/video/status/response-body.adoc[]
 
 
 == Post Video 
 
 .request
-include::{snippets}/videos/new/http-request.adoc[]
+include::{snippets}/video/new/http-request.adoc[]
 
 .Response
-include::{snippets}/videos/new/http-response.adoc[]
+include::{snippets}/video/new/http-response.adoc[]
 
 .CURL
-include::{snippets}/videos/new/curl-request.adoc[]
+include::{snippets}/video/new/curl-request.adoc[]
 
 .Request-Body
-include::{snippets}/videos/new/request-body.adoc[]
+include::{snippets}/video/new/request-body.adoc[]
 
 .Response-Body
-include::{snippets}/videos/new/response-body.adoc[]
+include::{snippets}/video/new/response-body.adoc[]
 
 .request-fields
-include::{snippets}/videos/new/request-fields.adoc[]
+include::{snippets}/video/new/request-fields.adoc[]
 
 
 == Delete Video 
 
 .request
-include::{snippets}/videos/delete/http-request.adoc[]
+include::{snippets}/video/delete/http-request.adoc[]
 
 .Response
-include::{snippets}/videos/delete/http-response.adoc[]
+include::{snippets}/video/delete/http-response.adoc[]
 
 .CURL
-include::{snippets}/videos/delete/curl-request.adoc[]
+include::{snippets}/video/delete/curl-request.adoc[]
 
 .Request-Body
-include::{snippets}/videos/delete/request-body.adoc[]
+include::{snippets}/video/delete/request-body.adoc[]
 
 .Response-Body
-include::{snippets}/videos/delete/response-body.adoc[]
+include::{snippets}/video/delete/response-body.adoc[]
 
 

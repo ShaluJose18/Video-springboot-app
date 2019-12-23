@@ -1,13 +1,13 @@
-package com.revature.Videoservicespring.service;
+package com.revature.videoservicespring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.Videoservicespring.dao.InsertAllVideoDAO;
-import com.revature.Videoservicespring.exception.DBException;
-import com.revature.Videoservicespring.exception.ServiceException;
-import com.revature.Videoservicespring.model.Video;
-import com.revature.Videoservicespring.util.MessageConstants;
+import com.revature.videoservicespring.dao.InsertAllVideoDAO;
+import com.revature.videoservicespring.exception.DBException;
+import com.revature.videoservicespring.exception.ServiceException;
+import com.revature.videoservicespring.model.Video;
+import com.revature.videoservicespring.util.MessageConstants;
 
 @Service
 public class DeleteVideoService {

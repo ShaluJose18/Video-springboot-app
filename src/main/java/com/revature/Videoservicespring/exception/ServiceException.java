@@ -1,4 +1,4 @@
-package com.revature.Videoservicespring.exception;
+package com.revature.videoservicespring.exception;
 
 public class ServiceException extends Exception {
 
